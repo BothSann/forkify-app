@@ -3,7 +3,7 @@ import recipeView from './views/recipeView.js';
 import searchView from './views/searchView.js';
 import resultsView from './views/resultsView.js';
 import paginationView from './views/paginationView.js';
-import bookmarkView from './views/bookmarkView.js';
+import BookmarksView from './views/bookmarksView.js';
 
 import 'core-js/stable';
 import View from './views/View.js';
@@ -20,7 +20,7 @@ const controlRecipe = async function () {
 
     // 0. Update result view to mark selected search result
     resultsView.update(model.getSearchResultsPage());
-    bookmarkView.update(model.state.bookmarks);
+    BookmarksView.update(model.state.bookmarks);
 
     // 1. Loading recipes
     await model.loadRecipe(id);
@@ -79,7 +79,7 @@ const controlAddBookmark = function () {
   recipeView.update(model.state.recipe);
 
   // 3. Render bookmark
-  bookmarkView.render(model.state.bookmarks);
+  BookmarksView.render(model.state.bookmarks);
 };
 
 const init = function () {
