@@ -33,27 +33,26 @@ A modern JavaScript application for searching and saving your favorite recipes.
 
 1. Clone the repository
 
-```bash
-git clone [https://github.com/BothSann/forkify-app.git]
-```
+   ```bash
+   git clone https://github.com/BothSann/forkify-app.git
+   ```
 
 2. Install dependencies
 
-```bash
-npm install
-```
+   ```bash
+   npm install
+   ```
 
 3. Start development server
 
-```bash
-npm start
-```
+   ```bash
+   npm start
+   ```
 
 4. Build for production
-
-```bash
-npm run build
-```
+   ```bash
+   npm run build
+   ```
 
 ## 📖 Usage
 
