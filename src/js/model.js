@@ -45,8 +45,11 @@ export const loadSearchResults = async function (query) {
   try {
     state.search.query = query;
 
-    const data = await AJAX(`${API_URL}?search=${query}&key=${KEY}`);
-    console.log(data);
+    const url = `${API_URL}?search=${query}&key=${KEY}`;
+    console.log('Making API request to:', url);
+
+    const data = await AJAX(url);
+    console.log('API Response:', data);
 
     // Store the result in state.search.results
     state.search.results = data.data.recipes.map(rec => {
