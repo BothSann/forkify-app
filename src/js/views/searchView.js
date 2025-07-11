@@ -14,6 +14,7 @@ class SearchView {
   addHandlerSearch(handler) {
     this.#parentElement.addEventListener('submit', function (e) {
       e.preventDefault();
+      e.stopPropagation();
       handler();
     });
   }
