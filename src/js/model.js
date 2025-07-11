@@ -47,9 +47,16 @@ export const loadSearchResults = async function (query) {
 
     const url = `${API_URL}?search=${query}&key=${KEY}`;
     console.log('Making API request to:', url);
+    console.log('API_URL:', API_URL);
+    console.log('KEY:', KEY);
 
     const data = await AJAX(url);
     console.log('API Response:', data);
+
+    // Check if data and data.data exist
+    if (!data || !data.data || !data.data.recipes) {
+      throw new Error('Invalid API response structure');
+    }
 
     // Store the result in state.search.results
     state.search.results = data.data.recipes.map(rec => {
@@ -62,8 +69,15 @@ export const loadSearchResults = async function (query) {
       };
     });
     state.search.page = 1;
+
+    console.log(
+      'Search results processed:',
+      state.search.results.length,
+      'recipes found'
+    );
   } catch (err) {
-    console.log(`${err} 💥💥`);
+    console.log(`Search error details: ${err} 💥💥`);
+    console.error('Full error object:', err);
     throw err;
   }
 };

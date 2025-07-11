@@ -55,7 +55,10 @@ const controlSearchResults = async function () {
     // Render initial pagination button
     paginationView.render(model.state.search);
   } catch (err) {
-    console.log(err);
+    console.log('Search error:', err);
+    resultsView.renderError(
+      'Could not find recipes. Please try again or check your internet connection!'
+    );
   }
 };
 

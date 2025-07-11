@@ -10,6 +10,8 @@ const timeout = function (s) {
 
 export const AJAX = async function (url, uploadData = undefined) {
   try {
+    console.log(`Fetching from: ${url}`);
+
     const fetchPro = uploadData
       ? fetch(url, {
           method: 'POST',
@@ -21,11 +23,25 @@ export const AJAX = async function (url, uploadData = undefined) {
       : fetch(url);
 
     const response = await Promise.race([fetchPro, timeout(TIMEOUT_SEC)]);
-    const data = await response.json();
-    if (!response.ok) throw new Error(`${data.message} (${response.status})`);
 
+    console.log('Response status:', response.status);
+    console.log('Response ok:', response.ok);
+
+    // Check if response is ok before trying to parse JSON
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.log('Error response text:', errorText);
+      throw new Error(
+        `HTTP Error ${response.status}: ${errorText || 'Unknown error'}`
+      );
+    }
+
+    const data = await response.json();
+    console.log('Parsed JSON data:', data);
     return data;
   } catch (err) {
+    console.error('AJAX Error:', err.message);
+    console.error('Full error:', err);
     throw err;
   }
 };
